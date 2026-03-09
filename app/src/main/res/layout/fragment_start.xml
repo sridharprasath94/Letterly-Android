@@ -10,25 +10,25 @@
     tools:context=".presentation.start.StartFragment">
 
     <Button
-        android:id="@+id/fiveBySixBtn"
+        android:id="@+id/classicBtn"
         android:layout_width="match_parent"
 
         android:layout_height="wrap_content"
         android:shadowRadius="@android:integer/config_longAnimTime"
-        android:text="5 * 6 Mode" />
-
-    <Button
-        android:id="@+id/sixBySevenBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:shadowRadius="@android:integer/config_longAnimTime"
-        android:text="6 * 7 Mode" />
+        android:text="Classic" />
 
     <Button
-        android:id="@+id/sevenByEightMode"
+        android:id="@+id/advancedBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:shadowRadius="@android:integer/config_longAnimTime"
-        android:text="7 * 8 Mode" />
+        android:text="Advanced" />
+
+    <Button
+        android:id="@+id/expertBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:shadowRadius="@android:integer/config_longAnimTime"
+        android:text="Expert" />
 
 </LinearLayout>

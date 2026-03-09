@@ -18,15 +18,15 @@ class StartFragment : Fragment(R.layout.fragment_start) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         with(binding) {
-            fiveBySixBtn.setOnClickListener {
+            classicBtn.setOnClickListener {
                 findNavController().navigate(StartFragmentDirections.actionStartToGaming(GameMode.CLASSIC))
             }
 
-            sixBySevenBtn.setOnClickListener {
+            advancedBtn.setOnClickListener {
                 findNavController().navigate(StartFragmentDirections.actionStartToGaming(GameMode.ADVANCED))
             }
 
-            sevenByEightMode.setOnClickListener {
+            expertBtn.setOnClickListener {
                 findNavController().navigate(StartFragmentDirections.actionStartToGaming(GameMode.EXPERT))
             }
         }
