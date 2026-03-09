@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation app:startDestination="@id/startFragment"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <fragment
+        android:id="@+id/startFragment"
+        android:name="com.flash.letterly.presentation.start.StartFragment">
+        <action
+            android:id="@+id/action_start_to_gaming"
+            app:destination="@id/gameFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/gameFragment"
+        android:name="com.flash.letterly.presentation.game.GameFragment">
+
+        <argument
+            android:name="gameMode"
+            app:argType="com.flash.letterly.presentation.shared.GameMode" />
+
+    </fragment>
+
+</navigation>

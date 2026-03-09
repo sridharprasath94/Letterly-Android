@@ -1,0 +1,306 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="8dp">
+
+    <!-- Row 1 -->
+    <LinearLayout
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/keyQ"
+            style="?android:attr/buttonBarButtonStyle"
+            android:text="Q"
+            android:background="@drawable/key_tile_bg"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_margin="2dp" />
+
+        <Button
+            android:id="@+id/keyW"
+            style="?android:attr/buttonBarButtonStyle"
+            android:text="W"
+            android:background="@drawable/key_tile_bg"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_margin="2dp" />
+
+        <Button
+            android:id="@+id/keyE"
+            style="?android:attr/buttonBarButtonStyle"
+            android:text="E"
+            android:background="@drawable/key_tile_bg"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_margin="2dp" />
+
+        <Button
+            android:id="@+id/keyR"
+            style="?android:attr/buttonBarButtonStyle"
+            android:text="R"
+            android:background="@drawable/key_tile_bg"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_margin="2dp" />
+
+        <Button
+            android:id="@+id/keyT"
+            style="?android:attr/buttonBarButtonStyle"
+            android:text="T"
+            android:background="@drawable/key_tile_bg"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_margin="2dp" />
+
+        <Button
+            android:id="@+id/keyY"
+            style="?android:attr/buttonBarButtonStyle"
+            android:text="Y"
+            android:background="@drawable/key_tile_bg"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_margin="2dp" />
+
+        <Button
+            android:id="@+id/keyU"
+            style="?android:attr/buttonBarButtonStyle"
+            android:text="U"
+            android:background="@drawable/key_tile_bg"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_margin="2dp" />
+
+        <Button
+            android:id="@+id/keyI"
+            style="?android:attr/buttonBarButtonStyle"
+            android:text="I"
+            android:background="@drawable/key_tile_bg"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_margin="2dp" />
+
+        <Button
+            android:id="@+id/keyO"
+            style="?android:attr/buttonBarButtonStyle"
+            android:text="O"
+            android:background="@drawable/key_tile_bg"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_margin="2dp" />
+
+        <Button
+            android:id="@+id/keyP"
+            style="?android:attr/buttonBarButtonStyle"
+            android:text="P"
+            android:background="@drawable/key_tile_bg"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_margin="2dp"/>
+
+    </LinearLayout>
+
+    <!-- Row 2 -->
+
+    <LinearLayout
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/keyA"
+            style="?android:attr/buttonBarButtonStyle"
+            android:text="A"
+            android:background="@drawable/key_tile_bg"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_margin="2dp" />
+
+        <Button
+            android:id="@+id/keyS"
+            style="?android:attr/buttonBarButtonStyle"
+            android:text="S"
+            android:background="@drawable/key_tile_bg"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_margin="2dp" />
+
+        <Button
+            android:id="@+id/keyD"
+            style="?android:attr/buttonBarButtonStyle"
+            android:text="D"
+            android:background="@drawable/key_tile_bg"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_margin="2dp" />
+
+        <Button
+            android:id="@+id/keyF"
+            style="?android:attr/buttonBarButtonStyle"
+            android:text="F"
+            android:background="@drawable/key_tile_bg"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_margin="2dp" />
+
+        <Button
+            android:id="@+id/keyG"
+            style="?android:attr/buttonBarButtonStyle"
+            android:text="G"
+            android:background="@drawable/key_tile_bg"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_margin="2dp" />
+
+        <Button
+            android:id="@+id/keyH"
+            style="?android:attr/buttonBarButtonStyle"
+            android:text="H"
+            android:background="@drawable/key_tile_bg"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_margin="2dp" />
+
+        <Button
+            android:id="@+id/keyJ"
+            style="?android:attr/buttonBarButtonStyle"
+            android:text="J"
+            android:background="@drawable/key_tile_bg"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_margin="2dp" />
+
+        <Button
+            android:id="@+id/keyK"
+            style="?android:attr/buttonBarButtonStyle"
+            android:text="K"
+            android:background="@drawable/key_tile_bg"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_margin="2dp" />
+
+        <Button
+            android:id="@+id/keyL"
+            style="?android:attr/buttonBarButtonStyle"
+            android:text="L"
+            android:background="@drawable/key_tile_bg"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_margin="2dp"/>
+
+    </LinearLayout>
+
+    <!-- Row 3 -->
+
+    <LinearLayout
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <Button
+            android:id="@+id/keyZ"
+            style="?android:attr/buttonBarButtonStyle"
+            android:text="Z"
+            android:background="@drawable/key_tile_bg"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_margin="2dp" />
+
+        <Button
+            android:id="@+id/keyX"
+            style="?android:attr/buttonBarButtonStyle"
+            android:text="X"
+            android:background="@drawable/key_tile_bg"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_margin="2dp" />
+
+        <Button
+            android:id="@+id/keyC"
+            style="?android:attr/buttonBarButtonStyle"
+            android:text="C"
+            android:background="@drawable/key_tile_bg"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_margin="2dp" />
+
+        <Button
+            android:id="@+id/keyV"
+            style="?android:attr/buttonBarButtonStyle"
+            android:text="V"
+            android:background="@drawable/key_tile_bg"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_margin="2dp" />
+
+        <Button
+            android:id="@+id/keyB"
+            style="?android:attr/buttonBarButtonStyle"
+            android:text="B"
+            android:background="@drawable/key_tile_bg"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_margin="2dp" />
+
+        <Button
+            android:id="@+id/keyN"
+            style="?android:attr/buttonBarButtonStyle"
+            android:text="N"
+            android:background="@drawable/key_tile_bg"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_margin="2dp" />
+
+        <Button
+            android:id="@+id/keyM"
+            style="?android:attr/buttonBarButtonStyle"
+            android:text="M"
+            android:background="@drawable/key_tile_bg"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_margin="2dp" />
+
+
+        <Button
+            android:id="@+id/keyDelete"
+            style="?android:attr/buttonBarButtonStyle"
+            android:text="⌫"
+            android:background="@drawable/key_tile_bg"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_margin="2dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>
