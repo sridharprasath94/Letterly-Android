@@ -1,15 +1,13 @@
 package com.flash.letterly.presentation.game
 
-import android.graphics.Color
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.core.graphics.toColorInt
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.flash.letterly.R
-import com.flash.letterly.domain.model.LetterState
 import com.flash.letterly.domain.model.LetterTile
 
 class BoardAdapter :
@@ -37,25 +35,9 @@ class BoardAdapter :
         private val letterText: TextView = view.findViewById(R.id.letterText)
 
         fun bind(tile: LetterTile) {
-            letterText.text = tile.letter?.toString() ?: ""
-
-            val backgroundColor = when (tile.state) {
-                LetterState.CORRECT -> "#6AAA64".toColorInt()
-                LetterState.PRESENT -> "#C9B458".toColorInt()
-                LetterState.ABSENT -> "#787C7E".toColorInt()
-                LetterState.EMPTY -> Color.WHITE
-            }
-
-            val textColor = when (tile.state) {
-                LetterState.CORRECT,
-                LetterState.PRESENT,
-                LetterState.ABSENT -> Color.WHITE
-
-                LetterState.EMPTY -> Color.BLACK
-            }
-
-            letterText.setBackgroundColor(backgroundColor)
-            letterText.setTextColor(textColor)
+            letterText.text = tile.letter?.uppercase() ?: ""
+            letterText.backgroundTintList = ColorStateList.valueOf(tile.state.bgColor)
+            letterText.setTextColor(tile.state.textColor)
         }
     }
 
