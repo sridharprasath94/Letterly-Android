@@ -35,7 +35,7 @@ class BoardAdapter :
         private val letterText: TextView = view.findViewById(R.id.letterText)
 
         fun bind(tile: LetterTile) {
-            letterText.text = tile.letter?.toString() ?: ""
+            letterText.text = tile.letter?.uppercase() ?: ""
             letterText.backgroundTintList = ColorStateList.valueOf(tile.state.bgColor)
             letterText.setTextColor(tile.state.textColor)
         }
