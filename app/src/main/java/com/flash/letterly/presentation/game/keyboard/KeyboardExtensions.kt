@@ -1,7 +1,7 @@
 package com.flash.letterly.presentation.game.keyboard
 
+import android.content.res.ColorStateList
 import android.widget.Button
-import androidx.core.graphics.toColorInt
 import com.flash.letterly.databinding.ViewKeyboardBinding
 import com.flash.letterly.domain.model.LetterState
 
@@ -23,6 +23,6 @@ fun ViewKeyboardBinding.updateKeyboard(
 
     keyboard.forEach { (char, state) ->
         val button = buttons[char.uppercaseChar()] ?: return@forEach
-        button.setBackgroundColor(state.bgColor )
+        button.backgroundTintList = ColorStateList.valueOf(state.bgColor)
     }
 }

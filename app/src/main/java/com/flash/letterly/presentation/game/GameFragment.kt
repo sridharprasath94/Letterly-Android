@@ -3,6 +3,8 @@ package com.flash.letterly.presentation.game
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.addCallback
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -13,10 +15,10 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.flash.letterly.R
 import com.flash.letterly.databinding.FragmentGameBinding
+import com.flash.letterly.domain.usecase.GameStatus
 import com.flash.letterly.presentation.game.keyboard.KeyboardController
 import com.flash.letterly.presentation.game.keyboard.keyButtons
 import com.flash.letterly.presentation.game.keyboard.updateKeyboard
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import dev.androidbroadcast.vbpd.viewBinding
 import kotlinx.coroutines.flow.collectLatest
@@ -42,6 +44,23 @@ class GameFragment : Fragment(R.layout.fragment_game) {
 
             boardRecyclerView.adapter = boardAdapter
             setupKeyboard()
+
+            requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+                val state = viewModel.state.value
+
+                if (state.gameStatus == GameStatus.CONTINUE) {
+                    AlertDialog.Builder(requireContext())
+                        .setTitle("Leave game?")
+                        .setMessage("Your current game will be lost. Do you want to go back?")
+                        .setPositiveButton("Leave") { _, _ ->
+                            findNavController().popBackStack()
+                        }
+                        .setNegativeButton("Stay", null)
+                        .show()
+                } else {
+                    findNavController().popBackStack()
+                }
+            }
 
             boardRecyclerView.addItemDecoration(
                 GridSpacingItemDecoration(
@@ -93,7 +112,7 @@ class GameFragment : Fragment(R.layout.fragment_game) {
                         }
 
                         GameEvent.GameWon -> {
-                            MaterialAlertDialogBuilder(requireContext())
+                            AlertDialog.Builder(requireContext())
                                 .setTitle("You won! 🎉")
                                 .setMessage("Play again?")
                                 .setPositiveButton("Replay") { _, _ ->
@@ -106,7 +125,7 @@ class GameFragment : Fragment(R.layout.fragment_game) {
                         }
 
                         is GameEvent.GameLost -> {
-                            MaterialAlertDialogBuilder(requireContext())
+                            AlertDialog.Builder(requireContext())
                                 .setTitle("You lost! 😢")
                                 .setMessage("The word was: ${event.target}\nPlay again?")
                                 .setPositiveButton("Replay") { _, _ ->

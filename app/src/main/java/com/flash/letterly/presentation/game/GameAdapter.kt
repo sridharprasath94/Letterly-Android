@@ -1,5 +1,6 @@
 package com.flash.letterly.presentation.game
 
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,7 +36,7 @@ class BoardAdapter :
 
         fun bind(tile: LetterTile) {
             letterText.text = tile.letter?.toString() ?: ""
-            letterText.setBackgroundColor(tile.state.bgColor)
+            letterText.backgroundTintList = ColorStateList.valueOf(tile.state.bgColor)
             letterText.setTextColor(tile.state.textColor)
         }
     }
