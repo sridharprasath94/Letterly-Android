@@ -35,8 +35,10 @@ jobs:
 
       - name: Rename APK with version
         run: |
-          VERSION=${{ github.ref_name }}
-          mv app/build/outputs/apk/release/app-release.apk app/build/outputs/apk/release/letterly-${VERSION}.apk
+          VERSION=${GITHUB_REF_NAME}
+          APK_PATH=$(find app/build/outputs/apk -name "*.apk" | head -n 1)
+          echo "Found APK at $APK_PATH"
+          mv "$APK_PATH" "letterly-${VERSION}.apk"
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
