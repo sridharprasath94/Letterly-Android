@@ -9,26 +9,25 @@
     android:padding="40dp"
     tools:context=".presentation.start.StartFragment">
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/classicBtn"
         android:layout_width="match_parent"
-
         android:layout_height="wrap_content"
         android:shadowRadius="@android:integer/config_longAnimTime"
-        android:text="Classic" />
+        android:text="@string/classic" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/advancedBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:shadowRadius="@android:integer/config_longAnimTime"
-        android:text="Advanced" />
+        android:text="@string/advanced" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/expertBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:shadowRadius="@android:integer/config_longAnimTime"
-        android:text="Expert" />
+        android:text="@string/expert" />
 
 </LinearLayout>

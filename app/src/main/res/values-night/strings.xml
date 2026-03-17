@@ -27,4 +27,7 @@
     <string name="n">N</string>
     <string name="m">M</string>
     <string name="del">⌫</string>
+    <string name="classic">Classic</string>
+    <string name="advanced">Advanced</string>
+    <string name="expert">Expert</string>
 </resources>
