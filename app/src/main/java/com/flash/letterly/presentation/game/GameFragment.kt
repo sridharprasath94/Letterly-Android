@@ -21,8 +21,6 @@ import com.flash.letterly.presentation.game.keyboard.keyButtons
 import com.flash.letterly.presentation.game.keyboard.updateKeyboard
 import com.flash.letterly.presentation.utils.showCenteredSnackBar
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.textview.MaterialTextView
 import dagger.hilt.android.AndroidEntryPoint
 import dev.androidbroadcast.vbpd.viewBinding
 import kotlinx.coroutines.flow.collectLatest
