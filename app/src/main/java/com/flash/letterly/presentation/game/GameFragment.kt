@@ -19,7 +19,10 @@ import com.flash.letterly.presentation.game.keyboard.KeyboardController
 import com.flash.letterly.presentation.game.keyboard.clearKeyboard
 import com.flash.letterly.presentation.game.keyboard.keyButtons
 import com.flash.letterly.presentation.game.keyboard.updateKeyboard
+import com.flash.letterly.presentation.utils.showCenteredSnackBar
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textview.MaterialTextView
 import dagger.hilt.android.AndroidEntryPoint
 import dev.androidbroadcast.vbpd.viewBinding
 import kotlinx.coroutines.flow.collectLatest
@@ -97,11 +100,7 @@ class GameFragment : Fragment(R.layout.fragment_game) {
                 viewModel.events.collectLatest { event ->
                     when (event) {
                         GameEvent.InvalidWord -> {
-                            Toast.makeText(
-                                requireContext(),
-                                "Word not in dictionary",
-                                Toast.LENGTH_SHORT
-                            ).show()
+                            binding.root.showCenteredSnackBar("Word not in dictionary")
                         }
 
                         GameEvent.DuplicateWord -> {
@@ -163,3 +162,5 @@ class GameFragment : Fragment(R.layout.fragment_game) {
         )
     }
 }
+
+
