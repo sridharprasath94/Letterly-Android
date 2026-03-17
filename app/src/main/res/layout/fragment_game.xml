@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background= "?attr/colorPrimarySurface"
+    android:background= "?attr/colorSecondaryContainer"
     android:layout_gravity="bottom"
     tools:context=".presentation.game.GameFragment">
 
@@ -21,12 +21,12 @@
 
         <TextView
             android:id="@+id/gameModeTextView"
-            android:text="Classic"
+            tools:text="Classic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:textAllCaps="true"
-            android:textColor="?attr/colorPrimaryInverse"
+            android:textColor="?attr/colorOnBackground"
             android:gravity="center"
             android:textSize="30sp"
             android:textStyle="bold"
