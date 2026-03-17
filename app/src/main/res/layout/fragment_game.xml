@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background= "?attr/colorSecondaryContainer"
     android:layout_gravity="bottom"
     tools:context=".presentation.game.GameFragment">
 
@@ -20,12 +21,17 @@
 
         <TextView
             android:id="@+id/gameModeTextView"
+            tools:text="Classic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:textAllCaps="true"
+            android:textColor="?attr/colorOnBackground"
             android:gravity="center"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textSize="30sp"
+            android:textStyle="bold"
+
+            />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/boardRecyclerView"
