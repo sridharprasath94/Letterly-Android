@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.addCallback
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -17,8 +16,10 @@ import com.flash.letterly.R
 import com.flash.letterly.databinding.FragmentGameBinding
 import com.flash.letterly.domain.usecase.GameStatus
 import com.flash.letterly.presentation.game.keyboard.KeyboardController
+import com.flash.letterly.presentation.game.keyboard.clearKeyboard
 import com.flash.letterly.presentation.game.keyboard.keyButtons
 import com.flash.letterly.presentation.game.keyboard.updateKeyboard
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import dev.androidbroadcast.vbpd.viewBinding
 import kotlinx.coroutines.flow.collectLatest
@@ -49,7 +50,7 @@ class GameFragment : Fragment(R.layout.fragment_game) {
                 val state = viewModel.state.value
 
                 if (state.gameStatus == GameStatus.CONTINUE) {
-                    AlertDialog.Builder(requireContext())
+                    MaterialAlertDialogBuilder(requireContext())
                         .setTitle("Leave game?")
                         .setMessage("Your current game will be lost. Do you want to go back?")
                         .setPositiveButton("Leave") { _, _ ->
@@ -112,26 +113,30 @@ class GameFragment : Fragment(R.layout.fragment_game) {
                         }
 
                         GameEvent.GameWon -> {
-                            AlertDialog.Builder(requireContext())
+                            MaterialAlertDialogBuilder(requireContext())
                                 .setTitle("You won! 🎉")
                                 .setMessage("Play again?")
                                 .setPositiveButton("Replay") { _, _ ->
+                                    binding.keyboardView.clearKeyboard()
                                     viewModel.resetGame()
                                 }
                                 .setNegativeButton("Back") { _, _ ->
+                                    binding.keyboardView.clearKeyboard()
                                     findNavController().popBackStack()
                                 }
                                 .show()
                         }
 
                         is GameEvent.GameLost -> {
-                            AlertDialog.Builder(requireContext())
+                            MaterialAlertDialogBuilder(requireContext())
                                 .setTitle("You lost! 😢")
                                 .setMessage("The word was: ${event.target}\nPlay again?")
                                 .setPositiveButton("Replay") { _, _ ->
+                                    binding.keyboardView.clearKeyboard()
                                     viewModel.resetGame()
                                 }
                                 .setNegativeButton("Back") { _, _ ->
+                                    binding.keyboardView.clearKeyboard()
                                     findNavController().popBackStack()
                                 }
                                 .show()
