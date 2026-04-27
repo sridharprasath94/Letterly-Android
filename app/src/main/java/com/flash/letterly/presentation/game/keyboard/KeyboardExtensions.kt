@@ -22,7 +22,7 @@ fun ViewKeyboardBinding.clearKeyboard() {
 
     buttons.values.forEach { button ->
         val context = button.context
-        button.backgroundTintList = ColorStateList.valueOf(context.getColor(R.color.md_theme_surface))
+        button.backgroundTintList = ColorStateList.valueOf(context.getColor(R.color.keyboard_key_default))
         button.setTextColor(ColorStateList.valueOf(context.getColor(R.color.md_theme_onSurface)))
     }
 }
@@ -34,6 +34,12 @@ fun ViewKeyboardBinding.updateKeyboard(
 
     keyboard.forEach { (char, state) ->
         val button = buttons[char.uppercaseChar()] ?: return@forEach
-        button.backgroundTintList = ColorStateList.valueOf(state.bgColor)
+        val bgColor = if (state == LetterState.ABSENT) {
+            button.context.getColor(R.color.keyboard_key_absent)
+        } else {
+            state.bgColor
+        }
+        button.backgroundTintList = ColorStateList.valueOf(bgColor)
+        button.setTextColor(ColorStateList.valueOf(state.textColor))
     }
 }

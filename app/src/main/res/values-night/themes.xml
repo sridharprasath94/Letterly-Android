@@ -51,7 +51,7 @@
 
     <style name="KeyboardKeyButton">
         <item name="android:textColor">?attr/colorOnSurface</item>
-        <item name="backgroundTint">?attr/colorSurface</item>
+        <item name="backgroundTint">@color/keyboard_key_default</item>
         <item name="rippleColor">?attr/colorOnSurface</item>
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>

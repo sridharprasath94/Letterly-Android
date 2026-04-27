@@ -2,7 +2,6 @@ package com.flash.letterly.presentation.game
 
 import dagger.hilt.android.lifecycle.HiltViewModel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.flash.letterly.domain.model.createBoard
@@ -44,15 +43,10 @@ class GameViewModel @Inject constructor(
 
     private val guesses = mutableListOf<String>()
 
-    //// TODO : When DuplicateWord or InvalidWord event is emitted, we should trigger a shake animation on the current row. This can be achieved by adding a flag in the GameState that indicates an error, and then resetting it after the animation is done.
     fun startGame(mode: GameMode) {
         viewModelScope.launch {
             guesses.clear()
             val word = getRandomWordUseCase(mode) ?: return@launch
-            Log.d(
-                "GameViewModel",
-                "Selected word: ${word.value}" + " (length: ${word.value.length}) for mode: $mode"
-            )
 
             val board = createBoard(
                 wordLength = mode.wordLength,
@@ -72,20 +66,14 @@ class GameViewModel @Inject constructor(
         }
     }
 
-
     fun addLetter(letter: Char) {
-
         val state = _state.value
 
         if (state.currentCol >= state.gameMode.wordLength) return
 
         val board = state.board.map { it.toMutableList() }.toMutableList()
-
         val tile = board[state.currentRow][state.currentCol]
-
-        board[state.currentRow][state.currentCol] =
-            tile.copy(letter = letter)
-
+        board[state.currentRow][state.currentCol] = tile.copy(letter = letter)
 
         val newCol = state.currentCol + 1
         _state.update {
@@ -95,24 +83,19 @@ class GameViewModel @Inject constructor(
             )
         }
 
-        // 🔥 Auto submit when word is full
         if (newCol == state.targetWord.length) {
             submitGuess()
         }
     }
 
     fun removeLetter() {
-
         val state = _state.value
 
         if (state.currentCol == 0) return
 
         val newCol = state.currentCol - 1
-
         val board = state.board.map { it.toMutableList() }.toMutableList()
-
-        board[state.currentRow][newCol] =
-            board[state.currentRow][newCol].copy(letter = null)
+        board[state.currentRow][newCol] = board[state.currentRow][newCol].copy(letter = null)
 
         _state.update {
             it.copy(
@@ -122,9 +105,8 @@ class GameViewModel @Inject constructor(
         }
     }
 
-    fun submitGuess() {
+    private fun submitGuess() {
         viewModelScope.launch {
-
             val state = _state.value
 
             if (state.currentCol < state.gameMode.wordLength) return@launch
@@ -133,44 +115,25 @@ class GameViewModel @Inject constructor(
                 .mapNotNull { it.letter }
                 .joinToString("")
 
-            Log.d("GameViewModel", "Submitting guess: $guess")
-
-            // Prevent duplicate guesses
             if (checkDuplicateGuessUseCase(guess, guesses)) {
-
                 val clearedBoard = clearRowUseCase(
                     board = state.board,
                     row = state.currentRow,
                     wordLength = state.gameMode.wordLength
                 )
-
-                _state.update {
-                    it.copy(
-                        board = clearedBoard,
-                        currentCol = 0
-                    )
-                }
-
+                _state.update { it.copy(board = clearedBoard, currentCol = 0) }
                 _events.emit(GameEvent.DuplicateWord)
                 return@launch
             }
 
             val exists = checkWordExistsUseCase(guess)
             if (!exists) {
-
                 val clearedBoard = clearRowUseCase(
                     board = state.board,
                     row = state.currentRow,
                     wordLength = state.gameMode.wordLength
                 )
-
-                _state.update {
-                    it.copy(
-                        board = clearedBoard,
-                        currentCol = 0
-                    )
-                }
-
+                _state.update { it.copy(board = clearedBoard, currentCol = 0) }
                 _events.emit(GameEvent.InvalidWord)
                 return@launch
             }
@@ -211,7 +174,6 @@ class GameViewModel @Inject constructor(
             }
 
             if (status == GameStatus.WIN) {
-//                updateWordTimestampUseCase(state.targetWord, state.gameMode)
                 _events.emit(GameEvent.GameWon)
             } else if (status == GameStatus.LOSE) {
                 _events.emit(GameEvent.GameLost(state.targetWord))
@@ -222,9 +184,7 @@ class GameViewModel @Inject constructor(
     fun resetGame() {
         val mode = _state.value.gameMode
         guesses.clear()
-        _state.update {
-            GameState(gameMode = mode)
-        }
+        _state.update { GameState(gameMode = mode) }
         startGame(mode)
     }
 }
