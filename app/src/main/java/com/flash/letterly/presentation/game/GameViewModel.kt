@@ -14,6 +14,7 @@ import com.flash.letterly.domain.usecase.GameStatus
 import com.flash.letterly.domain.usecase.CheckDuplicateGuessUseCase
 import com.flash.letterly.domain.usecase.ClearRowUseCase
 import com.flash.letterly.domain.usecase.ApplyGuessResultUseCase
+import com.flash.letterly.domain.usecase.GetHintUseCase
 import com.flash.letterly.domain.usecase.UpdateKeyboardStateUseCase
 import com.flash.letterly.presentation.shared.GameMode
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -35,6 +36,7 @@ class GameViewModel @Inject constructor(
     private val clearRowUseCase: ClearRowUseCase,
     private val applyGuessResultUseCase: ApplyGuessResultUseCase,
     private val updateKeyboardStateUseCase: UpdateKeyboardStateUseCase,
+    private val getHintUseCase: GetHintUseCase,
 ) : ViewModel() {
     private val _state = MutableStateFlow(GameState())
     val state: StateFlow<GameState> = _state
@@ -42,6 +44,7 @@ class GameViewModel @Inject constructor(
     val events = _events.asSharedFlow()
 
     private val guesses = mutableListOf<String>()
+    private val previousHints = mutableListOf<String>()
 
     fun startGame(mode: GameMode) {
         viewModelScope.launch {
@@ -181,9 +184,28 @@ class GameViewModel @Inject constructor(
         }
     }
 
+    fun requestHint() {
+        val state = _state.value
+        if (state.hintsUsed >= state.gameMode.maxHints) return
+        viewModelScope.launch {
+            _state.update { it.copy(hintState = HintState.Loading) }
+            val result = getHintUseCase(_state.value.targetWord, previousHints.toList())
+            _state.update { it.copy(hintState = HintState.Idle) }
+            if (result.isSuccess) {
+                val hint = result.getOrThrow()
+                previousHints.add(hint)
+                _state.update { it.copy(hintsUsed = it.hintsUsed + 1) }
+                _events.emit(GameEvent.HintReceived(hint))
+            } else {
+                _events.emit(GameEvent.HintFailed)
+            }
+        }
+    }
+
     fun resetGame() {
         val mode = _state.value.gameMode
         guesses.clear()
+        previousHints.clear()
         _state.update { GameState(gameMode = mode) }
         startGame(mode)
     }
