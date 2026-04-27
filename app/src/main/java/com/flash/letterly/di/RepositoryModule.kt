@@ -1,6 +1,8 @@
 package com.flash.letterly.di
 
+import com.flash.letterly.data.repository.HintRepositoryImpl
 import com.flash.letterly.data.repository.WordRepositoryImpl
+import com.flash.letterly.domain.repository.HintRepository
 import com.flash.letterly.domain.repository.WordRepository
 import dagger.Binds
 import dagger.Module
@@ -18,4 +20,10 @@ abstract class RepositoryModule {
     abstract fun bindWordRepository(
         impl: WordRepositoryImpl
     ): WordRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindHintRepository(
+        impl: HintRepositoryImpl
+    ): HintRepository
 }
