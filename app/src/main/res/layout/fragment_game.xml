@@ -4,8 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background= "?attr/colorSecondaryContainer"
-    android:layout_gravity="bottom"
     tools:context=".presentation.game.GameFragment">
 
     <LinearLayout
@@ -18,20 +16,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-
         <TextView
             android:id="@+id/gameModeTextView"
-            tools:text="Classic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:gravity="center"
             android:textAllCaps="true"
             android:textColor="?attr/colorOnBackground"
-            android:gravity="center"
             android:textSize="30sp"
             android:textStyle="bold"
+            tools:text="Classic" />
 
-            />
+        <TextView
+            android:id="@+id/gameModeSubtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="center"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:textSize="14sp"
+            tools:text="5 letters · 6 guesses" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/boardRecyclerView"
@@ -43,7 +48,6 @@
             tools:listitem="@layout/item_letter_tile" />
 
     </LinearLayout>
-
 
     <include
         android:id="@+id/keyboardView"

@@ -30,4 +30,18 @@
     <string name="classic">Classic</string>
     <string name="advanced">Advanced</string>
     <string name="expert">Expert</string>
+    <string name="choose_difficulty">Choose your difficulty</string>
+    <string name="game_mode_subtitle">%1$d letters · %2$d guesses</string>
+    <string name="leave_game_title">Leave game?</string>
+    <string name="leave_game_message">Your current game will be lost. Do you want to go back?</string>
+    <string name="leave_button">Leave</string>
+    <string name="stay_button">Stay</string>
+    <string name="game_won_title">You won! 🎉</string>
+    <string name="game_lost_title">You lost! 😢</string>
+    <string name="game_lost_message">The word was: %1$s\nPlay again?</string>
+    <string name="play_again_message">Play again?</string>
+    <string name="replay_button">Replay</string>
+    <string name="back_button">Back</string>
+    <string name="word_not_in_dictionary">Word not in dictionary</string>
+    <string name="word_already_guessed">Word has already been guessed</string>
 </resources>

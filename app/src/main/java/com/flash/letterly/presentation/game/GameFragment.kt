@@ -36,6 +36,11 @@ class GameFragment : Fragment(R.layout.fragment_game) {
         with(binding) {
             val span = args.gameMode.wordLength
             gameModeTextView.text = args.gameMode.toString()
+            gameModeSubtitle?.text = getString(
+                R.string.game_mode_subtitle,
+                args.gameMode.wordLength,
+                args.gameMode.maxGuesses
+            )
 
             boardRecyclerView.layoutManager =
                 GridLayoutManager(
@@ -51,12 +56,12 @@ class GameFragment : Fragment(R.layout.fragment_game) {
 
                 if (state.gameStatus == GameStatus.CONTINUE) {
                     MaterialAlertDialogBuilder(requireContext())
-                        .setTitle("Leave game?")
-                        .setMessage("Your current game will be lost. Do you want to go back?")
-                        .setPositiveButton("Leave") { _, _ ->
+                        .setTitle(R.string.leave_game_title)
+                        .setMessage(R.string.leave_game_message)
+                        .setPositiveButton(R.string.leave_button) { _, _ ->
                             findNavController().popBackStack()
                         }
-                        .setNegativeButton("Stay", null)
+                        .setNegativeButton(R.string.stay_button, null)
                         .show()
                 } else {
                     findNavController().popBackStack()
@@ -78,17 +83,19 @@ class GameFragment : Fragment(R.layout.fragment_game) {
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.state.collectLatest { state ->
-                // Update board
-                boardAdapter.submitBoard(state.board)
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.state.collectLatest { state ->
+                    // Update board
+                    boardAdapter.submitBoard(state.board)
 
-                // Ensure current row is visible
-                val span = args.gameMode.wordLength
-                val currentRowStart = state.currentRow * span
-                binding.boardRecyclerView.scrollToPosition(currentRowStart)
+                    // Ensure current row is visible
+                    val span = args.gameMode.wordLength
+                    val currentRowStart = state.currentRow * span
+                    binding.boardRecyclerView.scrollToPosition(currentRowStart)
 
-                // Update keyboard colors
-                binding.keyboardView.updateKeyboard(state.keyboard)
+                    // Update keyboard colors
+                    binding.keyboardView.updateKeyboard(state.keyboard)
+                }
             }
         }
 
@@ -97,22 +104,22 @@ class GameFragment : Fragment(R.layout.fragment_game) {
                 viewModel.events.collectLatest { event ->
                     when (event) {
                         GameEvent.InvalidWord -> {
-                            binding.root.showCenteredSnackBar("Word not in dictionary")
+                            binding.root.showCenteredSnackBar(getString(R.string.word_not_in_dictionary))
                         }
 
                         GameEvent.DuplicateWord -> {
-                            binding.root.showCenteredSnackBar("Word has already been guessed")
+                            binding.root.showCenteredSnackBar(getString(R.string.word_already_guessed))
                         }
 
                         GameEvent.GameWon -> {
                             MaterialAlertDialogBuilder(requireContext())
-                                .setTitle("You won! 🎉")
-                                .setMessage("Play again?")
-                                .setPositiveButton("Replay") { _, _ ->
+                                .setTitle(R.string.game_won_title)
+                                .setMessage(R.string.play_again_message)
+                                .setPositiveButton(R.string.replay_button) { _, _ ->
                                     binding.keyboardView.clearKeyboard()
                                     viewModel.resetGame()
                                 }
-                                .setNegativeButton("Back") { _, _ ->
+                                .setNegativeButton(R.string.back_button) { _, _ ->
                                     binding.keyboardView.clearKeyboard()
                                     findNavController().popBackStack()
                                 }
@@ -121,13 +128,13 @@ class GameFragment : Fragment(R.layout.fragment_game) {
 
                         is GameEvent.GameLost -> {
                             MaterialAlertDialogBuilder(requireContext())
-                                .setTitle("You lost! 😢")
-                                .setMessage("The word was: ${event.target}\nPlay again?")
-                                .setPositiveButton("Replay") { _, _ ->
+                                .setTitle(R.string.game_lost_title)
+                                .setMessage(getString(R.string.game_lost_message, event.target))
+                                .setPositiveButton(R.string.replay_button) { _, _ ->
                                     binding.keyboardView.clearKeyboard()
                                     viewModel.resetGame()
                                 }
-                                .setNegativeButton("Back") { _, _ ->
+                                .setNegativeButton(R.string.back_button) { _, _ ->
                                     binding.keyboardView.clearKeyboard()
                                     findNavController().popBackStack()
                                 }
@@ -155,5 +162,3 @@ class GameFragment : Fragment(R.layout.fragment_game) {
         )
     }
 }
-
-
