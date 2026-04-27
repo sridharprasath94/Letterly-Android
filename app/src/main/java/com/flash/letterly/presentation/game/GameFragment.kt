@@ -129,11 +129,22 @@ class GameFragment : Fragment(R.layout.fragment_game) {
                         }
 
                         is GameEvent.HintReceived -> {
-                            MaterialAlertDialogBuilder(requireContext())
+                            val state = viewModel.state.value
+                            val remaining = state.gameMode.maxHints - state.hintsUsed
+                            val message = event.hints.mapIndexed { index, hint ->
+                                "${getString(R.string.hint_label, index + 1)}: $hint"
+                            }.joinToString("\n\n")
+                            val builder = MaterialAlertDialogBuilder(requireContext())
                                 .setTitle(R.string.hint_dialog_title)
-                                .setMessage(event.hint)
-                                .setPositiveButton(android.R.string.ok, null)
-                                .show()
+                                .setMessage(message)
+                            if (remaining > 0) {
+                                builder
+                                    .setPositiveButton(R.string.get_next_hint) { _, _ -> requestHint() }
+                                    .setNegativeButton(R.string.close, null)
+                            } else {
+                                builder.setPositiveButton(R.string.close, null)
+                            }
+                            builder.show()
                         }
 
                         GameEvent.HintFailed -> {
@@ -147,19 +158,25 @@ class GameFragment : Fragment(R.layout.fragment_game) {
 
     private fun setupHintButton() {
         binding.hintButton?.setOnClickListener {
-            if (isNetworkAvailable()) {
-                viewModel.requestHint()
+            val state = viewModel.state.value
+            if (state.receivedHints.isEmpty()) {
+                requestHint()
             } else {
-                binding.root.showCenteredSnackBar(getString(R.string.no_internet))
+                viewModel.showHints()
             }
         }
+    }
+
+    private fun requestHint() {
+        if (isNetworkAvailable()) viewModel.requestHint()
+        else binding.root.showCenteredSnackBar(getString(R.string.no_internet))
     }
 
     private fun updateHintButton(hintsUsed: Int, maxHints: Int, hintState: HintState) {
         val remaining = maxHints - hintsUsed
         val isLoading = hintState == HintState.Loading
         binding.hintButton?.apply {
-            isEnabled = remaining > 0 && !isLoading
+            isEnabled = !isLoading && (remaining > 0 || hintsUsed > 0)
             alpha = if (remaining > 0) 1.0f else 0.4f
             setImageResource(
                 if (remaining > 0) R.drawable.ic_bulb_filled else R.drawable.ic_bulb_outline

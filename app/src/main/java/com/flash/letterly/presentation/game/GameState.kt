@@ -14,5 +14,6 @@ data class GameState(
     val gameStatus: GameStatus = GameStatus.CONTINUE,
     val keyboard: Map<Char, LetterState> = emptyMap(),
     val hintState: HintState = HintState.Idle,
-    val hintsUsed: Int = 0
+    val hintsUsed: Int = 0,
+    val receivedHints: List<String> = emptyList()
 )

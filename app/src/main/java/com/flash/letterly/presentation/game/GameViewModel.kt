@@ -177,6 +177,7 @@ class GameViewModel @Inject constructor(
             }
 
             if (status == GameStatus.WIN) {
+                updateWordTimestampUseCase(state.targetWord, state.gameMode)
                 _events.emit(GameEvent.GameWon)
             } else if (status == GameStatus.LOSE) {
                 _events.emit(GameEvent.GameLost(state.targetWord))
@@ -194,11 +195,18 @@ class GameViewModel @Inject constructor(
             if (result.isSuccess) {
                 val hint = result.getOrThrow()
                 previousHints.add(hint)
-                _state.update { it.copy(hintsUsed = it.hintsUsed + 1) }
-                _events.emit(GameEvent.HintReceived(hint))
+                val allHints = previousHints.toList()
+                _state.update { it.copy(hintsUsed = it.hintsUsed + 1, receivedHints = allHints) }
+                _events.emit(GameEvent.HintReceived(allHints))
             } else {
                 _events.emit(GameEvent.HintFailed)
             }
+        }
+    }
+
+    fun showHints() {
+        viewModelScope.launch {
+            _events.emit(GameEvent.HintReceived(_state.value.receivedHints))
         }
     }
 

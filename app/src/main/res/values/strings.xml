@@ -46,6 +46,9 @@
     <string name="word_already_guessed">Word has already been guessed</string>
     <string name="hint_button">💡 Hint</string>
     <string name="hint_count">x%1$d</string>
+    <string name="hint_label">Hint %1$d</string>
+    <string name="get_next_hint">Get Next Hint</string>
+    <string name="close">Close</string>
     <string name="hint_dialog_title">Hint</string>
     <string name="hint_error">Could not load hint. Try again.</string>
     <string name="no_internet">No internet connection</string>
